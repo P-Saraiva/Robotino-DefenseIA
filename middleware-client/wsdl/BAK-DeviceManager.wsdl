@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DeviceManager"
+ targetNamespace="urn:roboticsec.de/DeviceManager"
+ xmlns:tns="urn:roboticsec.de/DeviceManager"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:rdev="urn:roboticsec.de/DeviceManager"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:roboticsec.de/DeviceManager"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:rdev="urn:roboticsec.de/DeviceManager"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <simpleType name="eAccess">
+   <annotation>
+    <documentation>device access rights</documentation>
+   </annotation>
+   <restriction base="xsd:string">
+    <enumeration value="SERVICE-READ"/><!-- enum const = 1 -->
+    <enumeration value="SERVICE-WRITE"/><!-- enum const = 2 -->
+    <enumeration value="SERVICE-READ-WRITE"/><!-- enum const = 3 -->
+    <enumeration value="SERVICE-EXCLUSIVE"/><!-- enum const = 7 -->
+   </restriction>
+  </simpleType>
+  <complexType name="Descriptor">
+   <annotation>
+    <documentation>Descriptor</documentation>
+   </annotation>
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="vendor" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="versionMajor" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="versionMinor" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxTimeout" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="Credentials">
+   <sequence>
+     <element name="user-id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="user-password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <!-- operation request element -->
+  <element name="open">
+   <complexType>
+    <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="accessMode" type="rdev:eAccess" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="openResponse">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="openAuthenticated">
+   <complexType>
+    <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="credentials" type="rdev:Credentials" minOccurs="1" maxOccurs="1"/>
+     <element name="accessMode" type="rdev:eAccess" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="openAuthenticatedResponse">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="close">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="closeResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="list">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="listResponse">
+   <complexType>
+    <sequence>
+     <element name="devices" type="rdev:Descriptor" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="keepAlive">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="keepAliveResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="openRequest">
+ <part name="parameters" element="rdev:open"/>
+</message>
+
+<message name="openResponse">
+ <part name="parameters" element="rdev:openResponse"/>
+</message>
+
+<message name="openAuthenticatedRequest">
+ <part name="parameters" element="rdev:openAuthenticated"/>
+</message>
+
+<message name="openAuthenticatedResponse">
+ <part name="parameters" element="rdev:openAuthenticatedResponse"/>
+</message>
+
+<message name="close">
+ <part name="parameters" element="rdev:close"/>
+</message>
+
+<message name="closeResponse">
+ <part name="parameters" element="rdev:closeResponse"/>
+</message>
+
+<message name="list">
+ <part name="parameters" element="rdev:list"/>
+</message>
+
+<message name="listResponse">
+ <part name="parameters" element="rdev:listResponse"/>
+</message>
+
+<message name="keepAlive">
+ <part name="parameters" element="rdev:keepAlive"/>
+</message>
+
+<message name="keepAliveResponse">
+ <part name="parameters" element="rdev:keepAliveResponse"/>
+</message>
+
+<portType name="DeviceManagerPortType">
+ <operation name="open">
+  <documentation>Service definition of function rdev__open</documentation>
+  <input message="tns:openRequest"/>
+  <output message="tns:openResponse"/>
+ </operation>
+ <operation name="openAuthenticated">
+  <documentation>Service definition of function rdev__openAuthenticated</documentation>
+  <input message="tns:openAuthenticatedRequest"/>
+  <output message="tns:openAuthenticatedResponse"/>
+ </operation>
+ <operation name="close">
+  <documentation>Service definition of function rdev__close</documentation>
+  <input message="tns:close"/>
+  <output message="tns:closeResponse"/>
+ </operation>
+ <operation name="list">
+  <documentation>Service definition of function rdev__list</documentation>
+  <input message="tns:list"/>
+  <output message="tns:listResponse"/>
+ </operation>
+ <operation name="keepAlive">
+  <documentation>Service definition of function rdev__keepAlive</documentation>
+  <input message="tns:keepAlive"/>
+  <output message="tns:keepAliveResponse"/>
+ </operation>
+</portType>
+
+<binding name="DeviceManager" type="tns:DeviceManagerPortType">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="open">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="openAuthenticated">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="close">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="list">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="keepAlive">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="DeviceManager">
+ <documentation>device manager service</documentation>
+ <port name="DeviceManager" binding="tns:DeviceManager">
+  <SOAP:address location="http://localhost:80"/>
+ </port>
+</service>
+
+</definitions>

@@ -1,0 +1,1193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="IOControl"
+ targetNamespace="urn:roboticsec.de/IOControl"
+ xmlns:tns="urn:roboticsec.de/IOControl"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:rioc="urn:roboticsec.de/IOControl"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:roboticsec.de/IOControl"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:rioc="urn:roboticsec.de/IOControl"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <complexType name="SetState">
+   <sequence>
+     <element name="brake" type="rioc:Array3Ofxsd__boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="setPointSpeed" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="resetPosition" type="rioc:Array3Ofxsd__boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="isDriveSystemControl" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="vx" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vy" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vomega" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="kp" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="ki" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="kd" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="dOut" type="rioc:Array8Ofxsd__boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="relays" type="rioc:Array2Ofxsd__boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="powerOutputSetPoint" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderInputResetPosition" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="imageResolution" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="closedGripper" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="enableGripper" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="setOdometry" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryX" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryY" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryPhi" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="shutdown" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="q2pUpdateCounter" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="Array9Ofxsd__float">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:float[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array8Ofxsd__float">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:float[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array3Ofxsd__int">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:int[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array2Ofxsd__boolean">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:boolean[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array8Ofxsd__boolean">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:boolean[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array3Ofxsd__float">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:float[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <complexType name="Array3Ofxsd__boolean">
+   <complexContent>
+    <restriction base="SOAP-ENC:Array">
+     <attribute ref="SOAP-ENC:arrayType" WSDL:arrayType="xsd:boolean[]"/>
+    </restriction>
+   </complexContent>
+  </complexType>
+  <!-- operation request element -->
+  <element name="update">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="setstate" type="rioc:SetState" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SensorState">
+   <complexType>
+    <sequence>
+     <element name="powerOutputCurrent" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="powerOutputRawCurrent" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderInputPosition" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderInputVelocity" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="actualSpeed" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="actualPosition" type="rioc:Array3Ofxsd__int" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="motorCurrent" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="rawMotorCurrent" type="rioc:Array3Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="dIn" type="rioc:Array8Ofxsd__boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="aIn" type="rioc:Array8Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="distanceSensor" type="rioc:Array9Ofxsd__float" minOccurs="1" maxOccurs="1" nillable="false"/>
+     <element name="bumper" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="current" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="voltage" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="info" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="isPassiveMode" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="isGripperOpened" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="isGripperClosed" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryX" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryY" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="odometryPhi" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="q2pUpdateCounter" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="reset">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="resetResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="numMotors">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="numMotorsResponse">
+   <complexType>
+    <sequence>
+     <element name="n" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setMotorVelocity">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="rpm" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setMotorVelocityResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setVelocity">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="vX" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vY" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vOmega" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setVelocityResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="resetPosition">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="resetPositionResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setBrake">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="on" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setBrakeResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="motorCurrent">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="motorCurrentResponse">
+   <complexType>
+    <sequence>
+     <element name="current" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="motorActualPosition">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="motorActualPositionResponse">
+   <complexType>
+    <sequence>
+     <element name="position" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getActualMotorVelocity">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getActualMotorVelocityResponse">
+   <complexType>
+    <sequence>
+     <element name="rpm" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getActualVelocity">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getActualVelocityResponse">
+   <complexType>
+    <sequence>
+     <element name="vX" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vY" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="vOmega" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setOdometry">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="posX" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="posY" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="phi" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setOdometryResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getOdometry">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getOdometryResponse">
+   <complexType>
+    <sequence>
+     <element name="posX" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="posY" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="phi" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setMotorConstants">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="kp" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="kd" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="ki" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setMotorConstantsResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getMotorConstants">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motor" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getMotorConstantsResponse">
+   <complexType>
+    <sequence>
+     <element name="kp" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="kd" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+     <element name="ki" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="numDigitalOutput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="numDigitalOutputResponse">
+   <complexType>
+    <sequence>
+     <element name="n" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setDigitalOutput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="index" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="set" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setDigitalOutputResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="numDigitalInput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="numDigitalInputResponse">
+   <complexType>
+    <sequence>
+     <element name="n" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getDigitalInput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="index" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getDigitalInputResponse">
+   <complexType>
+    <sequence>
+     <element name="set" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getBumper">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getBumperResponse">
+   <complexType>
+    <sequence>
+     <element name="set" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="numAnalogInput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="numAnalogInputResponse">
+   <complexType>
+    <sequence>
+     <element name="n" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getAnalogInput">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="index" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getAnalogInputResponse">
+   <complexType>
+    <sequence>
+     <element name="value" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="numDistanceSensors">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="numDistanceSensorsResponse">
+   <complexType>
+    <sequence>
+     <element name="n" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="getDistanceSensor">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="index" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="getDistanceSensorResponse">
+   <complexType>
+    <sequence>
+     <element name="value" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="systemCurrent">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="systemCurrentResponse">
+   <complexType>
+    <sequence>
+     <element name="current" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="systemVoltage">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="systemVoltageResponse">
+   <complexType>
+    <sequence>
+     <element name="voltage" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setRelay">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="number" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+     <element name="on" type="xsd:unsignedByte" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setRelayResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="update">
+ <part name="parameters" element="rioc:update"/>
+</message>
+
+<message name="SensorState">
+ <part name="parameters" element="rioc:SensorState"/>
+</message>
+
+<message name="reset">
+ <part name="parameters" element="rioc:reset"/>
+</message>
+
+<message name="resetResponse">
+ <part name="parameters" element="rioc:resetResponse"/>
+</message>
+
+<message name="numMotorsRequest">
+ <part name="parameters" element="rioc:numMotors"/>
+</message>
+
+<message name="numMotorsResponse">
+ <part name="parameters" element="rioc:numMotorsResponse"/>
+</message>
+
+<message name="setMotorVelocity">
+ <part name="parameters" element="rioc:setMotorVelocity"/>
+</message>
+
+<message name="setMotorVelocityResponse">
+ <part name="parameters" element="rioc:setMotorVelocityResponse"/>
+</message>
+
+<message name="setVelocity">
+ <part name="parameters" element="rioc:setVelocity"/>
+</message>
+
+<message name="setVelocityResponse">
+ <part name="parameters" element="rioc:setVelocityResponse"/>
+</message>
+
+<message name="resetPosition">
+ <part name="parameters" element="rioc:resetPosition"/>
+</message>
+
+<message name="resetPositionResponse">
+ <part name="parameters" element="rioc:resetPositionResponse"/>
+</message>
+
+<message name="setBrake">
+ <part name="parameters" element="rioc:setBrake"/>
+</message>
+
+<message name="setBrakeResponse">
+ <part name="parameters" element="rioc:setBrakeResponse"/>
+</message>
+
+<message name="motorCurrentRequest">
+ <part name="parameters" element="rioc:motorCurrent"/>
+</message>
+
+<message name="motorCurrentResponse">
+ <part name="parameters" element="rioc:motorCurrentResponse"/>
+</message>
+
+<message name="motorActualPositionRequest">
+ <part name="parameters" element="rioc:motorActualPosition"/>
+</message>
+
+<message name="motorActualPositionResponse">
+ <part name="parameters" element="rioc:motorActualPositionResponse"/>
+</message>
+
+<message name="getActualMotorVelocityRequest">
+ <part name="parameters" element="rioc:getActualMotorVelocity"/>
+</message>
+
+<message name="getActualMotorVelocityResponse">
+ <part name="parameters" element="rioc:getActualMotorVelocityResponse"/>
+</message>
+
+<message name="getActualVelocity">
+ <part name="parameters" element="rioc:getActualVelocity"/>
+</message>
+
+<message name="getActualVelocityResponse">
+ <part name="parameters" element="rioc:getActualVelocityResponse"/>
+</message>
+
+<message name="setOdometry">
+ <part name="parameters" element="rioc:setOdometry"/>
+</message>
+
+<message name="setOdometryResponse">
+ <part name="parameters" element="rioc:setOdometryResponse"/>
+</message>
+
+<message name="getOdometry">
+ <part name="parameters" element="rioc:getOdometry"/>
+</message>
+
+<message name="getOdometryResponse">
+ <part name="parameters" element="rioc:getOdometryResponse"/>
+</message>
+
+<message name="setMotorConstants">
+ <part name="parameters" element="rioc:setMotorConstants"/>
+</message>
+
+<message name="setMotorConstantsResponse">
+ <part name="parameters" element="rioc:setMotorConstantsResponse"/>
+</message>
+
+<message name="getMotorConstants">
+ <part name="parameters" element="rioc:getMotorConstants"/>
+</message>
+
+<message name="getMotorConstantsResponse">
+ <part name="parameters" element="rioc:getMotorConstantsResponse"/>
+</message>
+
+<message name="numDigitalOutputRequest">
+ <part name="parameters" element="rioc:numDigitalOutput"/>
+</message>
+
+<message name="numDigitalOutputResponse">
+ <part name="parameters" element="rioc:numDigitalOutputResponse"/>
+</message>
+
+<message name="setDigitalOutput">
+ <part name="parameters" element="rioc:setDigitalOutput"/>
+</message>
+
+<message name="setDigitalOutputResponse">
+ <part name="parameters" element="rioc:setDigitalOutputResponse"/>
+</message>
+
+<message name="numDigitalInputRequest">
+ <part name="parameters" element="rioc:numDigitalInput"/>
+</message>
+
+<message name="numDigitalInputResponse">
+ <part name="parameters" element="rioc:numDigitalInputResponse"/>
+</message>
+
+<message name="getDigitalInputRequest">
+ <part name="parameters" element="rioc:getDigitalInput"/>
+</message>
+
+<message name="getDigitalInputResponse">
+ <part name="parameters" element="rioc:getDigitalInputResponse"/>
+</message>
+
+<message name="getBumperRequest">
+ <part name="parameters" element="rioc:getBumper"/>
+</message>
+
+<message name="getBumperResponse">
+ <part name="parameters" element="rioc:getBumperResponse"/>
+</message>
+
+<message name="numAnalogInputRequest">
+ <part name="parameters" element="rioc:numAnalogInput"/>
+</message>
+
+<message name="numAnalogInputResponse">
+ <part name="parameters" element="rioc:numAnalogInputResponse"/>
+</message>
+
+<message name="getAnalogInputRequest">
+ <part name="parameters" element="rioc:getAnalogInput"/>
+</message>
+
+<message name="getAnalogInputResponse">
+ <part name="parameters" element="rioc:getAnalogInputResponse"/>
+</message>
+
+<message name="numDistanceSensorsRequest">
+ <part name="parameters" element="rioc:numDistanceSensors"/>
+</message>
+
+<message name="numDistanceSensorsResponse">
+ <part name="parameters" element="rioc:numDistanceSensorsResponse"/>
+</message>
+
+<message name="getDistanceSensorRequest">
+ <part name="parameters" element="rioc:getDistanceSensor"/>
+</message>
+
+<message name="getDistanceSensorResponse">
+ <part name="parameters" element="rioc:getDistanceSensorResponse"/>
+</message>
+
+<message name="systemCurrentRequest">
+ <part name="parameters" element="rioc:systemCurrent"/>
+</message>
+
+<message name="systemCurrentResponse">
+ <part name="parameters" element="rioc:systemCurrentResponse"/>
+</message>
+
+<message name="systemVoltageRequest">
+ <part name="parameters" element="rioc:systemVoltage"/>
+</message>
+
+<message name="systemVoltageResponse">
+ <part name="parameters" element="rioc:systemVoltageResponse"/>
+</message>
+
+<message name="setRelay">
+ <part name="parameters" element="rioc:setRelay"/>
+</message>
+
+<message name="setRelayResponse">
+ <part name="parameters" element="rioc:setRelayResponse"/>
+</message>
+
+<portType name="IOControlPortType">
+ <operation name="update">
+  <documentation>Send the collection of set point values to and receive the collection of sensor readings from Robotino.</documentation>
+  <input message="tns:update"/>
+  <output message="tns:SensorState"/>
+ </operation>
+ <operation name="reset">
+  <documentation>Resets Robotino to its initial state. Also resets the odometry.</documentation>
+  <input message="tns:reset"/>
+  <output message="tns:resetResponse"/>
+ </operation>
+ <operation name="numMotors">
+  <documentation>Returns the number of available motors</documentation>
+  <input message="tns:numMotorsRequest"/>
+  <output message="tns:numMotorsResponse"/>
+ </operation>
+ <operation name="setMotorVelocity">
+  <documentation>Sets the velocity of a single motor</documentation>
+  <input message="tns:setMotorVelocity"/>
+  <output message="tns:setMotorVelocityResponse"/>
+ </operation>
+ <operation name="setVelocity">
+  <documentation>Sets the velocity of the robot</documentation>
+  <input message="tns:setVelocity"/>
+  <output message="tns:setVelocityResponse"/>
+ </operation>
+ <operation name="resetPosition">
+  <documentation>Service definition of function rioc__resetPosition</documentation>
+  <input message="tns:resetPosition"/>
+  <output message="tns:resetPositionResponse"/>
+ </operation>
+ <operation name="setBrake">
+  <documentation>Service definition of function rioc__setBrake</documentation>
+  <input message="tns:setBrake"/>
+  <output message="tns:setBrakeResponse"/>
+ </operation>
+ <operation name="motorCurrent">
+  <documentation>Service definition of function rioc__motorCurrent</documentation>
+  <input message="tns:motorCurrentRequest"/>
+  <output message="tns:motorCurrentResponse"/>
+ </operation>
+ <operation name="motorActualPosition">
+  <documentation>Service definition of function rioc__motorActualPosition</documentation>
+  <input message="tns:motorActualPositionRequest"/>
+  <output message="tns:motorActualPositionResponse"/>
+ </operation>
+ <operation name="getActualMotorVelocity">
+  <documentation>Retrieves the actual velocity of a specific motor</documentation>
+  <input message="tns:getActualMotorVelocityRequest"/>
+  <output message="tns:getActualMotorVelocityResponse"/>
+ </operation>
+ <operation name="getActualVelocity">
+  <documentation>Retrieves the actual velocity of the robot</documentation>
+  <input message="tns:getActualVelocity"/>
+  <output message="tns:getActualVelocityResponse"/>
+ </operation>
+ <operation name="setOdometry">
+  <documentation>Sets the odometry</documentation>
+  <input message="tns:setOdometry"/>
+  <output message="tns:setOdometryResponse"/>
+ </operation>
+ <operation name="getOdometry">
+  <documentation>Retrieves the estimated position based on the actual velocity values</documentation>
+  <input message="tns:getOdometry"/>
+  <output message="tns:getOdometryResponse"/>
+ </operation>
+ <operation name="setMotorConstants">
+  <documentation>Service definition of function rioc__setMotorConstants</documentation>
+  <input message="tns:setMotorConstants"/>
+  <output message="tns:setMotorConstantsResponse"/>
+ </operation>
+ <operation name="getMotorConstants">
+  <documentation>Service definition of function rioc__getMotorConstants</documentation>
+  <input message="tns:getMotorConstants"/>
+  <output message="tns:getMotorConstantsResponse"/>
+ </operation>
+ <operation name="numDigitalOutput">
+  <documentation>Returns the number of available digital outputs</documentation>
+  <input message="tns:numDigitalOutputRequest"/>
+  <output message="tns:numDigitalOutputResponse"/>
+ </operation>
+ <operation name="setDigitalOutput">
+  <documentation>Sets the value of a specific digital output</documentation>
+  <input message="tns:setDigitalOutput"/>
+  <output message="tns:setDigitalOutputResponse"/>
+ </operation>
+ <operation name="numDigitalInput">
+  <documentation>Returns the number of available digital inputs</documentation>
+  <input message="tns:numDigitalInputRequest"/>
+  <output message="tns:numDigitalInputResponse"/>
+ </operation>
+ <operation name="getDigitalInput">
+  <documentation>Retrieves the value of a specific digital input in volts</documentation>
+  <input message="tns:getDigitalInputRequest"/>
+  <output message="tns:getDigitalInputResponse"/>
+ </operation>
+ <operation name="getBumper">
+  <documentation>Checks if the bumper is pressed</documentation>
+  <input message="tns:getBumperRequest"/>
+  <output message="tns:getBumperResponse"/>
+ </operation>
+ <operation name="numAnalogInput">
+  <documentation>Returns the number of available analog inputs</documentation>
+  <input message="tns:numAnalogInputRequest"/>
+  <output message="tns:numAnalogInputResponse"/>
+ </operation>
+ <operation name="getAnalogInput">
+  <documentation>Retrieves the value of a specific analog input</documentation>
+  <input message="tns:getAnalogInputRequest"/>
+  <output message="tns:getAnalogInputResponse"/>
+ </operation>
+ <operation name="numDistanceSensors">
+  <documentation>Service definition of function rioc__numDistanceSensors</documentation>
+  <input message="tns:numDistanceSensorsRequest"/>
+  <output message="tns:numDistanceSensorsResponse"/>
+ </operation>
+ <operation name="getDistanceSensor">
+  <documentation>Service definition of function rioc__getDistanceSensor</documentation>
+  <input message="tns:getDistanceSensorRequest"/>
+  <output message="tns:getDistanceSensorResponse"/>
+ </operation>
+ <operation name="systemCurrent">
+  <documentation>Service definition of function rioc__systemCurrent</documentation>
+  <input message="tns:systemCurrentRequest"/>
+  <output message="tns:systemCurrentResponse"/>
+ </operation>
+ <operation name="systemVoltage">
+  <documentation>Service definition of function rioc__systemVoltage</documentation>
+  <input message="tns:systemVoltageRequest"/>
+  <output message="tns:systemVoltageResponse"/>
+ </operation>
+ <operation name="setRelay">
+  <documentation>Service definition of function rioc__setRelay</documentation>
+  <input message="tns:setRelay"/>
+  <output message="tns:setRelayResponse"/>
+ </operation>
+</portType>
+
+<binding name="IOControl" type="tns:IOControlPortType">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="update">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="reset">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="numMotors">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setMotorVelocity">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setVelocity">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="resetPosition">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setBrake">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="motorCurrent">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="motorActualPosition">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getActualMotorVelocity">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getActualVelocity">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setOdometry">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getOdometry">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setMotorConstants">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getMotorConstants">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="numDigitalOutput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setDigitalOutput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="numDigitalInput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getDigitalInput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getBumper">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="numAnalogInput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getAnalogInput">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="numDistanceSensors">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="getDistanceSensor">
+  <SOAP:operation soapAction="http://localhost/distance"/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="systemCurrent">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="systemVoltage">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setRelay">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="IOControl">
+ <documentation>robotino main interface</documentation>
+ <port name="IOControl" binding="tns:IOControl">
+  <SOAP:address location="http://localhost:80"/>
+ </port>
+</service>
+
+</definitions>

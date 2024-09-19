@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="Camera"
+ targetNamespace="urn:roboticsec.de/Camera"
+ xmlns:tns="urn:roboticsec.de/Camera"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:rcam="urn:roboticsec.de/Camera"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:roboticsec.de/Camera"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:rcam="urn:roboticsec.de/Camera"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <!-- operation request element -->
+  <element name="currentResolution">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="currentResolutionResponse">
+   <complexType>
+    <sequence>
+     <element name="width" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+     <element name="height" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="setResolution">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="width" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+     <element name="height" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="setResolutionResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="startStreaming">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="startStreamingResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="startStreamingToPort">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="port" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="startStreamingToPortResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="startStreamingToAddress">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="ip" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="port" type="xsd:unsignedShort" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="startStreamingToAddressResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="stopStreaming">
+   <complexType>
+    <sequence>
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="stopStreamingResponse">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="currentResolution">
+ <part name="parameters" element="rcam:currentResolution"/>
+</message>
+
+<message name="currentResolutionResponse">
+ <part name="parameters" element="rcam:currentResolutionResponse"/>
+</message>
+
+<message name="setResolution">
+ <part name="parameters" element="rcam:setResolution"/>
+</message>
+
+<message name="setResolutionResponse">
+ <part name="parameters" element="rcam:setResolutionResponse"/>
+</message>
+
+<message name="startStreaming">
+ <part name="parameters" element="rcam:startStreaming"/>
+</message>
+
+<message name="startStreamingResponse">
+ <part name="parameters" element="rcam:startStreamingResponse"/>
+</message>
+
+<message name="startStreamingToPort">
+ <part name="parameters" element="rcam:startStreamingToPort"/>
+</message>
+
+<message name="startStreamingToPortResponse">
+ <part name="parameters" element="rcam:startStreamingToPortResponse"/>
+</message>
+
+<message name="startStreamingToAddress">
+ <part name="parameters" element="rcam:startStreamingToAddress"/>
+</message>
+
+<message name="startStreamingToAddressResponse">
+ <part name="parameters" element="rcam:startStreamingToAddressResponse"/>
+</message>
+
+<message name="stopStreaming">
+ <part name="parameters" element="rcam:stopStreaming"/>
+</message>
+
+<message name="stopStreamingResponse">
+ <part name="parameters" element="rcam:stopStreamingResponse"/>
+</message>
+
+<portType name="CameraPortType">
+ <operation name="currentResolution">
+  <documentation>Service definition of function rcam__currentResolution</documentation>
+  <input message="tns:currentResolution"/>
+  <output message="tns:currentResolutionResponse"/>
+ </operation>
+ <operation name="setResolution">
+  <documentation>Service definition of function rcam__setResolution</documentation>
+  <input message="tns:setResolution"/>
+  <output message="tns:setResolutionResponse"/>
+ </operation>
+ <operation name="startStreaming">
+  <documentation>Service definition of function rcam__startStreaming</documentation>
+  <input message="tns:startStreaming"/>
+  <output message="tns:startStreamingResponse"/>
+ </operation>
+ <operation name="startStreamingToPort">
+  <documentation>Service definition of function rcam__startStreamingToPort</documentation>
+  <input message="tns:startStreamingToPort"/>
+  <output message="tns:startStreamingToPortResponse"/>
+ </operation>
+ <operation name="startStreamingToAddress">
+  <documentation>Service definition of function rcam__startStreamingToAddress</documentation>
+  <input message="tns:startStreamingToAddress"/>
+  <output message="tns:startStreamingToAddressResponse"/>
+ </operation>
+ <operation name="stopStreaming">
+  <documentation>Service definition of function rcam__stopStreaming</documentation>
+  <input message="tns:stopStreaming"/>
+  <output message="tns:stopStreamingResponse"/>
+ </operation>
+</portType>
+
+<binding name="Camera" type="tns:CameraPortType">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="currentResolution">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="setResolution">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="startStreaming">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="startStreamingToPort">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="startStreamingToAddress">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="stopStreaming">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="Camera">
+ <documentation>robotino camera</documentation>
+ <port name="Camera" binding="tns:Camera">
+  <SOAP:address location="http://localhost:80"/>
+ </port>
+</service>
+
+</definitions>
